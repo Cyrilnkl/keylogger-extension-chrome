@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Todo Liste</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ Ma Todo Liste</h1>
+      <p class="subtitle">Organisez votre journée</p>
+    </header>
+
+    <div class="add-task-section">
+      <input type="text" id="task-input" placeholder="Ajouter une nouvelle tâche..." autocomplete="off">
+      <button id="add-btn" class="btn-add">
+        <span>+</span>
+      </button>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Toutes</button>
+      <button class="filter-btn" data-filter="active">Actives</button>
+      <button class="filter-btn" data-filter="completed">Terminées</button>
+    </div>
+
+    <div class="tasks-container" id="tasks-container">
+      <!-- Les tâches seront ajoutées ici dynamiquement -->
+    </div>
+
+    <div class="stats">
+      <span id="task-count">0 tâche</span>
+      <button id="clear-completed" class="btn-clear">Effacer terminées</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

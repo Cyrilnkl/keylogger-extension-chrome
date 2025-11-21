@@ -1,0 +1,20 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const { analyzeUserPersona, generateSessionSummary, analyzeGlobalTrends } = require('./ai-analysis');
+
+const app = express();
+const PORT = 4000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Dossiers
+const LOGS_DIR = path.join(__dirname, 'logs');
+const DATA_DIR = path.join(__dirname, 'data');
+const USERS_DB = path.join(DATA_DIR, 'users.json');
+const AI_CACHE_FILE = path.join(DATA_DIR, 'ai-cache.json');

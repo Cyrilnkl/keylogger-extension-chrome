@@ -1,0 +1,108 @@
+/* Styles pour le persona IA */
+
+.persona-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+.persona-header {
+    margin-bottom: 20px;
+}
+
+.persona-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.persona-content {
+    display: grid;
+    gap: 20px;
+}
+
+.persona-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.persona-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.persona-description {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.persona-traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.trait-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.interest-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.insights-list {
+    list-style: none;
+    padding: 0;
+}
+
+.insights-list li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.insights-list li:before {
+    content: '💡';
+    position: absolute;
+    left: 0;
+}
+
+.persona-summary {
+    font-size: 14px;
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 0.95;
+}
+
+.persona-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.persona-section strong {
+    font-weight: 600;
+    margin-right: 5px;
+}

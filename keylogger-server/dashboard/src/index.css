@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 174 72% 56%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 271 51% 68%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 174 72% 56%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 86% 97%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 174 72% 56%;
+    --radius: 0.5rem;
+    --chart-1: 174 72% 56%;
+    --chart-2: 271 51% 68%;
+    --chart-3: 340 75% 65%;
+    --chart-4: 142 76% 36%;
+    --chart-5: 45 93% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-xl border-border/50;
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(79, 209, 197, 0.3);
+  }
+  
+  .glow-secondary {
+    box-shadow: 0 0 20px rgba(159, 122, 234, 0.3);
+  }
+}
