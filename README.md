@@ -111,7 +111,6 @@ Le projet est divisé en 4 composants principaux :
 
 - **Node.js** >= 18.x
 - **npm** >= 9.x
-- **Docker** (optionnel, pour le déploiement)
 - **Compte Azure OpenAI** (pour l'IA)
 - **Navigateur Chrome** (pour l'extension)
 
@@ -197,13 +196,9 @@ const SERVER_CONFIG = {
 };
 ```
 
-Pour changer l'URL du serveur :
-- En développement : `http://localhost:4000`
-- En production : `http://votre-domaine.com:40001`
-
 ### Dashboard - Configuration API
 
-Le dashboard appelle automatiquement `http://localhost:4000` via le proxy Nginx en développement, ou `/api` en production.
+Le dashboard appelle automatiquement `http://localhost:4000`.
 
 ---
 
@@ -245,70 +240,6 @@ La landing page est sur `http://localhost:3000`
 3. Cliquer sur "Charger l'extension non empaquetée"
 4. Sélectionner le dossier `/extension`
 5. L'extension est installée ! 🎉
-
-### Production - Scripts Utiles
-
-```bash
-# Build toutes les images Docker
-./build-and-push.sh
-
-# Déployer sur VPS
-./deploy-vps.sh
-
-# Rebuild uniquement le backend
-cd keylogger-server
-docker build -t cyrilnkl/keylogger-backend:latest .
-
-# Rebuild uniquement le dashboard
-cd keylogger-server/dashboard
-docker build -t cyrilnkl/keylogger-dashboard:latest .
-```
-
----
-
-## 🐳 Déploiement
-
-### Docker Compose (Recommandé)
-
-Le projet inclut un fichier `docker-compose.prod.yml` pour le déploiement.
-
-```bash
-# Build et push des images (avec votre Docker Hub username)
-./build-and-push.sh
-
-# Déployer sur VPS
-./deploy-vps.sh
-```
-
-### Ports par défaut
-
-- **Backend** : 40001 (production) / 4000 (dev)
-- **Dashboard** : 40002 (production) / 5173 (dev)
-- **Landing** : 40003 (production) / 3000 (dev)
-
-### Configuration VPS
-
-Modifier `deploy-vps.sh` avec votre IP :
-
-```bash
-VPS_USER="debian"
-VPS_HOST="votre-ip-vps"
-```
-
-### Variables d'environnement Docker
-
-Le fichier `docker-compose.prod.yml` contient déjà les configurations. Pour ajouter vos clés Azure :
-
-```yaml
-backend:
-  environment:
-    - NODE_ENV=production
-    - PORT=4000
-    - AZURE_OPENAI_ENDPOINT=https://...
-    - AZURE_OPENAI_API_KEY=votre-clé
-    - AZURE_OPENAI_DEPLOYMENT=gpt-4
-    - AZURE_OPENAI_API_VERSION=2024-02-15-preview
-```
 
 ---
 
@@ -493,11 +424,6 @@ keylogger-extension/
 - Vanilla JavaScript
 - Chrome Extension Manifest V3
 
-**Déploiement**
-- Docker & Docker Compose
-- Nginx (reverse proxy)
-- Alpine Linux (images légères)
-
 ### Scripts npm disponibles
 
 ```bash
@@ -547,13 +473,6 @@ node server.js
 2. Naviguer sur des sites web avec l'extension activée
 3. Vérifier `/keylogger-server/data/users.json` contient des données
 4. Rafraîchir le dashboard
-
-### Docker : erreur "no matching manifest"
-
-```bash
-# Rebuilder avec la bonne architecture
-docker buildx build --platform linux/amd64 -t image:latest --push .
-```
 
 ### Azure OpenAI : erreur 401/403
 
