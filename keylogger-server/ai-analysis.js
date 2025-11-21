@@ -29,7 +29,7 @@ async function callAzureOpenAI(messages, maxTokens = 1000) {
 
         return response.data.choices[0].message.content;
     } catch (error) {
-        console.error('Erreur Azure OpenAI:', error.response?.data || error.message);
+        console.error('Azure OpenAI Error:', error.response?.data || error.message);
         throw error;
     }
 }
@@ -38,7 +38,7 @@ async function callAzureOpenAI(messages, maxTokens = 1000) {
 async function analyzeUserPersona(user) {
     // Vérifier qu'il y a assez de données
     if (!user.sessions || user.sessions.length < 2) {
-        console.log(`ℹ️  Pas assez de sessions pour ${user.userId} (${user.sessions?.length || 0}), retour persona par défaut`);
+        console.log(`ℹ️  Not enough sessions for ${user.userId} (${user.sessions?.length || 0}), returning default persona`);
         return {
             persona: {
                 nom: "Utilisateur Nouveau",
@@ -148,9 +148,9 @@ Sois précis et basé sur les données réelles. Réponds UNIQUEMENT avec le JSO
 
         return JSON.parse(response);
     } catch (error) {
-        console.error('❌ Erreur analyse persona:', error.message);
+        console.error('❌ Persona analysis error:', error.message);
         
-        // Retourner un persona par défaut en cas d'erreur
+        // Return default persona on error
         return {
             persona: {
                 nom: "Analyse Indisponible",
@@ -216,7 +216,7 @@ Réponds UNIQUEMENT avec le résumé, sans introduction.`;
 
         return await callAzureOpenAI(messages, 200);
     } catch (error) {
-        console.error('Erreur génération résumé:', error);
+        console.error('Summary generation error:', error);
         return "Résumé non disponible";
     }
 }
@@ -292,7 +292,7 @@ Réponds UNIQUEMENT avec le JSON, sans texte supplémentaire.`;
         }
         return JSON.parse(response);
     } catch (error) {
-        console.error('Erreur analyse session:', error);
+        console.error('Session analysis error:', error);
         return {
             type: 'other',
             category: 'Non analysé',
@@ -366,7 +366,7 @@ Réponds UNIQUEMENT avec le JSON.`;
         }
         return JSON.parse(response);
     } catch (error) {
-        console.error('Erreur analyse tendances:', error);
+        console.error('Trends analysis error:', error);
         return {
             tendances: [],
             catégoriesPrincipales: [],

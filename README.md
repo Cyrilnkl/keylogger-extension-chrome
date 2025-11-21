@@ -1,24 +1,24 @@
-# 🔐 Keylogger Extension - Système de Surveillance Intelligent
+# 🔐 Keylogger Extension - Intelligent Surveillance System
 
-Système complet de monitoring et d'analyse comportementale avec IA intégrée (Azure OpenAI). Composé d'une extension Chrome, d'un backend Node.js, d'un dashboard React et d'une landing page.
+Complete monitoring and behavioral analysis system with integrated AI (Azure OpenAI). Composed of a Chrome extension, Node.js backend, React dashboard, and landing page.
 
-## 📋 Table des matières
+## 📋 Table of Contents
 
 - [Architecture](#architecture)
-- [Fonctionnalités](#fonctionnalités)
-- [Prérequis](#prérequis)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Utilisation](#utilisation)
-- [Déploiement](#déploiement)
+- [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Structure du projet](#structure-du-projet)
+- [Project Structure](#project-structure)
 
 ---
 
 ## 🏗️ Architecture
 
-Le projet est divisé en 4 composants principaux :
+The project is divided into 4 main components:
 
 ```
 ┌─────────────────┐
@@ -44,102 +44,125 @@ Le projet est divisé en 4 composants principaux :
                           └─────────────────┘
 ```
 
-### Composants
+### Components
 
-1. **Extension Chrome** (`/extension`)
-   - Capture les frappes clavier et visites de pages
-   - Configuration serveur modifiable
-   - Envoi des données au backend
+1. **Chrome Extension** (`/extension`)
+   - Captures keystrokes and page visits
+   - Configurable server settings
+   - Sends data to backend
 
 2. **Backend API** (`/keylogger-server`)
-   - API REST Node.js/Express
-   - Stockage des données (JSON)
-   - Analyse IA avec Azure OpenAI
-   - Détection de données sensibles
-   - Corrélation URL/données
+   - REST API (Node.js/Express)
+   - Data storage (JSON)
+   - AI analysis with Azure OpenAI
+   - Sensitive data detection
+   - URL/data correlation
 
-3. **Dashboard Admin** (`/keylogger-server/dashboard`)
-   - Interface React moderne (Vite + TypeScript)
-   - Visualisation des utilisateurs et sessions
-   - Analyse de profils utilisateur par IA
-   - Graphiques et statistiques
-   - Recherche et filtres
-   - Groupement par site web
+3. **Admin Dashboard** (`/keylogger-server/dashboard`)
+   - Modern React interface (Vite + TypeScript)
+   - User and session visualization
+   - AI-powered user profile analysis
+   - Charts and statistics
+   - Search and filters
+   - Website grouping
 
 4. **Landing Page** (`/landing-page`)
-   - Site vitrine professionnel
-   - Téléchargement de l'extension (ZIP)
-   - Design Apple-like
+   - Professional showcase website
+   - Extension download (ZIP)
+   - Apple-like design
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Features
 
 ### 📊 Analytics & Monitoring
-- Capture de toutes les frappes clavier
-- Tracking des visites de pages
-- Reconstruction du texte saisi
-- Détection des champs de formulaire
+- Capture all keystrokes
+- Page visit tracking
+- Typed text reconstruction
+- Form field detection
 
-### 🤖 Intelligence Artificielle
-- **Génération de persona utilisateur** : Profil psychologique basé sur le comportement
-- **Résumés de session** : Analyse automatique des sessions
-- **Corrélation URL** : Détection de données critiques selon le contexte (banking, social, ecommerce)
-- **Tendances globales** : Analyse comportementale générale
+### 🤖 Artificial Intelligence
+- **User persona generation**: Psychological profile based on behavior
+- **Session summaries**: Automatic session analysis
+- **URL correlation**: Critical data detection based on context (banking, social, ecommerce)
+- **Global trends**: General behavioral analysis
 
-### 🔒 Sécurité & Détection
-- **Détection de données sensibles** :
-  - Mots de passe (champs password)
+### 🔒 Security & Detection
+- **Sensitive data detection**:
+  - Passwords (password fields)
   - Emails
-  - Cartes de crédit
-  - Numéros de sécurité sociale (SSN)
-  - Numéros de téléphone
-- **Scoring de sensibilité** : Classification automatique (low/medium/high/critical)
-- **Alertes de sécurité** : Mise en avant des sessions critiques
+  - Credit cards
+  - Social Security Numbers (SSN)
+  - Phone numbers
+- **Sensitivity scoring**: Automatic classification (low/medium/high/critical)
+- **Security alerts**: Highlight critical sessions
 
 ### 📈 Dashboard Features
-- Vue liste des utilisateurs avec statistiques
-- Profils utilisateurs détaillés
-- Onglet "By Website" pour grouper par domaine
-- Sessions expandables avec contenu des keylogs
-- Graphiques de distribution des risques
-- Recherche et filtrage temps réel
+- User list view with statistics
+- Detailed user profiles
+- "By Website" tab to group by domain
+- Expandable sessions with keylog content
+- Risk distribution charts
+- Real-time search and filtering
 
 ---
 
-## 🔧 Prérequis
+## 🔧 Prerequisites
 
 - **Node.js** >= 18.x
 - **npm** >= 9.x
-- **Compte Azure OpenAI** (pour l'IA)
-- **Navigateur Chrome** (pour l'extension)
+- **Azure OpenAI Account** (for AI features)
+- **Chrome Browser** (for extension)
+
+---
+
+## 🚀 Quick Start
+
+**The easiest way to get started:**
+
+```bash
+# Clone the repository
+git clone https://github.com/Cyrilnkl/keylogger-admin-extension-chrome.git
+cd keylogger-admin-extension-chrome
+
+# Run the quick start script
+./start.sh
+```
+
+This will:
+1. Install all dependencies
+2. Create `.env` file from template (edit with your Azure credentials)
+3. Start all 3 services automatically
+4. Open the dashboard at http://localhost:5173
 
 ---
 
 ## 📦 Installation
 
-### 1. Cloner le projet
+### Manual Installation
+
+#### 1. Clone the project
 
 ```bash
-git clone <repository-url>
-cd keylogger-extension
+git clone https://github.com/Cyrilnkl/keylogger-admin-extension-chrome.git
+cd keylogger-admin-extension-chrome
 ```
 
-### 2. Installation du Backend
+#### 2. Install Backend
 
 ```bash
 cd keylogger-server
 npm install
 ```
 
-### 3. Installation du Dashboard
+#### 3. Install Dashboard
 
 ```bash
 cd keylogger-server/dashboard
 npm install
 ```
 
-### 4. Installation de la Landing Page
+#### 4. Install Landing Page
 
 ```bash
 cd landing-page
@@ -150,20 +173,20 @@ npm install
 
 ## ⚙️ Configuration
 
-### Backend - Variables d'environnement
+### Backend - Environment Variables
 
-Créer un fichier `.env` dans `/keylogger-server` :
+Create a `.env` file in `/keylogger-server`:
 
 ```bash
 cp keylogger-server/.env.example keylogger-server/.env
 ```
 
-Éditer le fichier `.env` :
+Edit the `.env` file:
 
 ```env
 # Azure OpenAI Configuration
 AZURE_OPENAI_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
-AZURE_OPENAI_API_KEY=votre-clé-api-azure
+AZURE_OPENAI_API_KEY=your-azure-api-key
 AZURE_OPENAI_DEPLOYMENT=gpt-4
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
@@ -172,23 +195,23 @@ PORT=4000
 NODE_ENV=development
 ```
 
-### Obtenir vos credentials Azure OpenAI
+### Getting Azure OpenAI Credentials
 
-1. Créer une ressource Azure OpenAI sur [portal.azure.com](https://portal.azure.com)
-2. Déployer un modèle GPT-4 ou GPT-3.5
-3. Récupérer :
-   - L'endpoint : `Keys and Endpoint` → `Endpoint`
-   - La clé API : `Keys and Endpoint` → `Key 1`
-   - Le nom du déploiement : `Deployments` → nom de votre déploiement
+1. Create an Azure OpenAI resource at [portal.azure.com](https://portal.azure.com)
+2. Deploy a GPT-4 or GPT-3.5 model
+3. Get:
+   - Endpoint: `Keys and Endpoint` → `Endpoint`
+   - API Key: `Keys and Endpoint` → `Key 1`
+   - Deployment name: `Deployments` → your deployment name
 
-### Extension Chrome - Configuration
+### Chrome Extension - Configuration
 
-Le fichier `extension/config.js` contient :
+The `extension/config.js` file contains:
 
 ```javascript
 const SERVER_CONFIG = {
     enabled: true,
-    url: 'http://localhost:4000', // URL du backend
+    url: 'http://localhost:4000', // Backend URL
     endpoints: {
         keystroke: '/keystroke',
         pageVisit: '/page-visit'
@@ -196,58 +219,66 @@ const SERVER_CONFIG = {
 };
 ```
 
-### Dashboard - Configuration API
+### Dashboard - API Configuration
 
-Le dashboard appelle automatiquement `http://localhost:4000`.
+The dashboard automatically calls `http://localhost:4000`.
 
 ---
 
-## 🚀 Utilisation
+## 🚀 Usage
 
-### Développement Local
+### Local Development
 
-#### 1. Démarrer le Backend
+#### 1. Start Backend
 
 ```bash
 cd keylogger-server
 node server.js
 ```
 
-Le serveur démarre sur `http://localhost:4000`
+Server runs on `http://localhost:4000`
 
-#### 2. Démarrer le Dashboard
+#### 2. Start Dashboard
 
 ```bash
 cd keylogger-server/dashboard
 npm run dev
 ```
 
-Le dashboard est accessible sur `http://localhost:5173`
+Dashboard accessible at `http://localhost:5173`
 
-#### 3. Démarrer la Landing Page
+#### 3. Start Landing Page
 
 ```bash
 cd landing-page
 npm start
 ```
 
-La landing page est sur `http://localhost:3000`
+Landing page at `http://localhost:3000`
 
-#### 4. Installer l'Extension Chrome
+#### 4. Install Chrome Extension
 
-1. Ouvrir Chrome et aller à `chrome://extensions/`
-2. Activer le "Mode développeur" (coin supérieur droit)
-3. Cliquer sur "Charger l'extension non empaquetée"
-4. Sélectionner le dossier `/extension`
-5. L'extension est installée ! 🎉
+1. Open Chrome and go to `chrome://extensions/`
+2. Enable "Developer mode" (top right corner)
+3. Click "Load unpacked"
+4. Select the `/extension` folder
+5. Extension installed! 🎉
+
+### Using the Quick Start Script
+
+```bash
+./start.sh
+```
+
+This starts all services automatically. Press `Ctrl+C` to stop all services.
 
 ---
 
 ## 📡 API Documentation
 
-### Endpoints Backend
+### Endpoints
 
-#### Données brutes
+#### Raw Data
 
 ```http
 POST /batch-data
@@ -265,7 +296,7 @@ Content-Type: application/json
 }
 ```
 
-#### Utilisateurs
+#### Users
 
 ```http
 GET /api/users
@@ -275,7 +306,7 @@ GET /api/users/:userId
 Response: { user details }
 ```
 
-#### Statistiques
+#### Statistics
 
 ```http
 GET /api/stats
@@ -288,22 +319,22 @@ Response: {
 }
 ```
 
-#### Intelligence Artificielle
+#### Artificial Intelligence
 
 ```http
-# Analyser le profil d'un utilisateur
+# Analyze user profile
 GET /api/ai/analyze-user/:userId
 Response: {
-  persona: "Description du profil...",
+  persona: "Profile description...",
   cached: false
 }
 
-# Analyser une session
+# Analyze session
 POST /api/ai/analyze-session
 Body: { session: {...} }
 Response: { summary: "..." }
 
-# Corrélation URL
+# URL correlation
 POST /api/ai/correlate-url
 Body: { session: {...} }
 Response: {
@@ -314,41 +345,40 @@ Response: {
   recommendations: [...]
 }
 
-# Résumé de session
+# Session summary
 GET /api/ai/session-summary/:userId/:sessionId
 
-# Tendances globales
+# Global trends
 GET /api/ai/global-trends
 
-# Alertes de sécurité
+# Security alerts
 GET /api/ai/security-alerts
 ```
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project Structure
 
 ```
 keylogger-extension/
-├── extension/                    # Extension Chrome
-│   ├── manifest.json            # Configuration extension
+├── extension/                    # Chrome Extension
+│   ├── manifest.json            # Extension config
 │   ├── background.js            # Service worker
-│   ├── content.js               # Script de capture
-│   ├── config.js                # Configuration serveur
-│   ├── popup.html/js/css        # Interface popup
+│   ├── content.js               # Capture script
+│   ├── config.js                # Server config
+│   ├── popup.html/js/css        # Popup interface
 │   └── README.md
 │
-├── keylogger-server/            # Backend Node.js
-│   ├── server.js                # Serveur Express
-│   ├── ai-analysis.js           # Module Azure OpenAI
+├── keylogger-server/            # Node.js Backend
+│   ├── server.js                # Express server
+│   ├── ai-analysis.js           # Azure OpenAI module
 │   ├── package.json
-│   ├── .env.example             # Template variables env
-│   ├── Dockerfile
-│   ├── data/                    # Base de données JSON
+│   ├── .env.example             # Env variables template
+│   ├── data/                    # JSON database
 │   │   ├── users.json
 │   │   └── ai-cache.json
-│   ├── logs/                    # Logs des sessions
-│   └── dashboard/               # Dashboard React
+│   ├── logs/                    # Session logs
+│   └── dashboard/               # React Dashboard
 │       ├── src/
 │       │   ├── App.tsx
 │       │   ├── components/
@@ -360,50 +390,46 @@ keylogger-extension/
 │       │   └── lib/
 │       ├── package.json
 │       ├── vite.config.ts
-│       ├── tailwind.config.js
-│       └── Dockerfile
+│       └── tailwind.config.js
 │
-├── landing-page/                # Site vitrine
-│   ├── server.js                # Serveur Express
-│   ├── index.html               # Page d'accueil
+├── landing-page/                # Showcase website
+│   ├── server.js                # Express server
+│   ├── index.html               # Homepage
 │   ├── styles.css               # Styles
-│   ├── package.json
-│   └── Dockerfile
+│   └── package.json
 │
-├── docker-compose.prod.yml      # Configuration Docker
-├── build-and-push.sh           # Script build images
-├── deploy-vps.sh               # Script déploiement VPS
+├── start.sh                     # Quick start script
 ├── .gitignore
-└── README.md                    # Ce fichier
+└── README.md                    # This file
 ```
 
 ---
 
-## 🔐 Sécurité & Légalité
+## 🔐 Security & Legality
 
-⚠️ **IMPORTANT** : Ce projet est destiné à des fins éducatives uniquement.
+⚠️ **IMPORTANT**: This project is for educational purposes only.
 
-### Avertissements
+### Warnings
 
-- ❌ **Ne jamais utiliser** sans le consentement explicite des utilisateurs
-- ❌ **Illégal** dans la plupart des juridictions sans autorisation
-- ❌ **Violation de la vie privée** si utilisé à mauvais escient
-- ✅ Utiliser uniquement dans un cadre pédagogique ou de recherche
-- ✅ Toujours obtenir l'autorisation écrite avant tout déploiement
+- ❌ **Never use** without explicit user consent
+- ❌ **Illegal** in most jurisdictions without authorization
+- ❌ **Privacy violation** if misused
+- ✅ Use only in educational or research context
+- ✅ Always obtain written authorization before any deployment
 
-### Bonnes pratiques
+### Best Practices
 
-1. **Ne jamais stocker** de vraies données sensibles
-2. **Chiffrer** les communications en production (HTTPS)
-3. **Anonymiser** les données utilisateur
-4. **Respecter** le RGPD et lois sur la protection des données
-5. **Documenter** l'usage et obtenir les consentements
+1. **Never store** real sensitive data
+2. **Encrypt** communications in production (HTTPS)
+3. **Anonymize** user data
+4. **Respect** GDPR and data protection laws
+5. **Document** usage and obtain consent
 
 ---
 
-## 🛠️ Développement
+## 🛠️ Development
 
-### Technologies utilisées
+### Technologies Used
 
 **Backend**
 - Node.js 20
@@ -417,112 +443,112 @@ keylogger-extension/
 - Vite 7
 - Tailwind CSS 3
 - Shadcn/UI
-- Recharts (graphiques)
+- Recharts (charts)
 - Framer Motion (animations)
 
 **Extension**
 - Vanilla JavaScript
 - Chrome Extension Manifest V3
 
-### Scripts npm disponibles
+### Available npm Scripts
 
 ```bash
 # Backend
 cd keylogger-server
-npm start              # Démarrer le serveur
+npm start              # Start server
 
 # Dashboard
 cd keylogger-server/dashboard
-npm run dev            # Développement
-npm run build          # Build production
+npm run dev            # Development
+npm run build          # Production build
 npm run preview        # Preview build
 
 # Landing
 cd landing-page
-npm start              # Démarrer serveur
+npm start              # Start server
 ```
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Le backend ne démarre pas
+### Backend won't start
 
 ```bash
-# Vérifier que le port 4000 est libre
+# Check if port 4000 is free
 lsof -ti:4000 | xargs kill -9
 
-# Vérifier les variables d'environnement
+# Check environment variables
 cat keylogger-server/.env
 
-# Vérifier les logs
+# Check logs
 cd keylogger-server
 node server.js
 ```
 
-### L'extension ne se connecte pas
+### Extension won't connect
 
-1. Vérifier que le backend tourne sur `http://localhost:4000`
-2. Vérifier `extension/config.js` → `url` doit être `http://localhost:4000`
-3. Ouvrir la console de l'extension : `chrome://extensions` → "Inspecter les vues"
-4. Vérifier les requêtes réseau dans DevTools
+1. Check backend is running on `http://localhost:4000`
+2. Verify `extension/config.js` → `url` is `http://localhost:4000`
+3. Open extension console: `chrome://extensions` → "Inspect views"
+4. Check network requests in DevTools
 
-### Le dashboard affiche "No users"
+### Dashboard shows "No users"
 
-1. L'extension doit être active et capturer des données
-2. Naviguer sur des sites web avec l'extension activée
-3. Vérifier `/keylogger-server/data/users.json` contient des données
-4. Rafraîchir le dashboard
+1. Extension must be active and capturing data
+2. Browse websites with extension enabled
+3. Check `/keylogger-server/data/users.json` contains data
+4. Refresh dashboard
 
-### Azure OpenAI : erreur 401/403
+### Azure OpenAI: 401/403 error
 
-- Vérifier que la clé API est correcte dans `.env`
-- Vérifier que l'endpoint est le bon
-- Vérifier que le déploiement existe dans Azure
+- Verify API key is correct in `.env`
+- Verify endpoint is correct
+- Verify deployment exists in Azure
 
 ---
 
 ## 📝 License
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+This project is under MIT License. See LICENSE file for details.
 
 ---
 
-## 👥 Contribution
+## 👥 Contributing
 
-Les contributions sont les bienvenues ! N'hésitez pas à :
+Contributions are welcome! Feel free to:
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+1. Fork the project
+2. Create a branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
 ## 📞 Support
 
-Pour toute question ou problème :
+For questions or issues:
 
-- Ouvrir une issue sur GitHub
-- Consulter la documentation Azure OpenAI
-- Vérifier les logs du backend/dashboard
+- Open an issue on GitHub
+- Check Azure OpenAI documentation
+- Check backend/dashboard logs
 
 ---
 
 ## 🎯 Roadmap
 
-- [ ] Support PostgreSQL/MongoDB
-- [ ] Authentification utilisateurs
-- [ ] Export de rapports PDF
-- [ ] Support multi-langues
-- [ ] Mode hors ligne
-- [ ] Chiffrement end-to-end
-- [ ] Tests unitaires et E2E
-- [ ] CI/CD avec GitHub Actions
-- [ ] Documentation API Swagger
-- [ ] Dashboard mobile responsive
+- [ ] PostgreSQL/MongoDB support
+- [ ] User authentication
+- [ ] PDF report export
+- [ ] Multi-language support
+- [ ] Offline mode
+- [ ] End-to-end encryption
+- [ ] Unit and E2E tests
+- [ ] CI/CD with GitHub Actions
+- [ ] Swagger API documentation
+- [ ] Mobile responsive dashboard
 
 ---
 
-**⚠️ Rappel** : Ce projet est à des fins éducatives. Utilisez-le de manière responsable et éthique.
+**⚠️ Reminder**: This project is for educational purposes. Use it responsibly and ethically.
